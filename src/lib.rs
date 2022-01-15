@@ -13,6 +13,12 @@ pub struct Grid {
     pub v_groups: Vec<Vec<u8>>,
 }
 
+impl Default for Grid {
+    fn default() -> Self {
+        Grid::new()
+    }
+}
+
 impl Grid {
     pub fn new() -> Self {
         Grid {
@@ -41,17 +47,17 @@ impl Grid {
             let mut _v: Vec<u8> = Vec::with_capacity((height + 1) / 2);
 
             for j in 0..height {
-                let cell_h = input_data[i * width + j];
-                let cell_v = input_data[j * height + i];
+                let cell_h = &input_data[i * width + j];
+                let cell_v = &input_data[j * height + i];
 
-                if cell_h == 1 {
+                if *cell_h == 1 {
                     acc_h += 1;
                 } else if acc_h > 0 {
                     _h.push(acc_h);
                     acc_h = 0;
                 }
 
-                if cell_v == 1 {
+                if *cell_v == 1 {
                     acc_v += 1;
                 } else if acc_v > 0 {
                     _v.push(acc_v);
@@ -78,8 +84,8 @@ impl Grid {
                 1 => CellContent::Filled,
                 _ => CellContent::NotFilled,
             }),
-            h_groups: h_groups,
-            v_groups: v_groups,
+            h_groups,
+            v_groups,
         }
     }
 
