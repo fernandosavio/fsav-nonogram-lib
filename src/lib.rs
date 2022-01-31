@@ -23,24 +23,33 @@ impl Default for Grid {
 
 impl Grid {
     pub fn new() -> Self {
+        let mut h_groups = vec![];
+        let mut v_groups = vec![];
+
+        for _ in 0..10 {
+            h_groups.push(vec![]);
+            v_groups.push(vec![]);
+        }
+
+
         Grid {
             width: 10,
             height: 10,
             data: [false; 100],
-            h_groups: vec![],
-            v_groups: vec![],
+            h_groups,
+            v_groups,
         }
     }
     pub fn from_array(input_data: [u8; 100]) -> Self {
-        let width = 10;
-        let height = 10;
+        let width = 10u8;
+        let height = 10u8;
 
-        let (h_groups, v_groups) = calculate_groups(&input_data, width, height);
+        let (h_groups, v_groups) = calculate_groups(&input_data, width as usize, height as usize);
 
         Grid {
-            width: width as u8,
-            height: height as u8,
             data: input_data.map(|x| x == 1),
+            width,
+            height,
             h_groups,
             v_groups,
         }
@@ -58,13 +67,7 @@ impl Grid {
                 print!("│")
             }
 
-            print!(
-                "{}",
-                match x {
-                    true => "██",
-                    _ => "  ",
-                }
-            );
+            print!("{}", if *x == true {"██"} else {"  "});
 
             if i % width == (width - 1) {
                 println!("│")
