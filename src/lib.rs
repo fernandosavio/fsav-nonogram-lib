@@ -23,21 +23,12 @@ impl Default for Grid {
 
 impl Grid {
     pub fn new() -> Self {
-        let mut h_groups = vec![];
-        let mut v_groups = vec![];
-
-        for _ in 0..10 {
-            h_groups.push(vec![]);
-            v_groups.push(vec![]);
-        }
-
-
         Grid {
             width: 10,
             height: 10,
             data: [false; 100],
-            h_groups,
-            v_groups,
+            h_groups: vec![vec![]; 10],
+            v_groups: vec![vec![]; 10],
         }
     }
     pub fn from_array(input_data: [u8; 100]) -> Self {
