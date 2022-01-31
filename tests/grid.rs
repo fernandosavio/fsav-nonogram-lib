@@ -1,8 +1,8 @@
-use fsav_nonogram::Grid;
+use fsav_nonogram::{Grid, CellGroup};
 
 #[test]
 fn create_10_10_grid() {
-    let g: Grid = Grid::new();
+    let g = Grid::new();
 
     assert_eq!(g.width, 10);
     assert_eq!(g.height, 10);
@@ -24,9 +24,9 @@ fn create_grid_from_data() {
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     ];
 
-    let g: Grid = Grid::from_array(data);
+    let g = Grid::from_array(data);
     
-    let h_groups: Vec<Vec<u8>> = vec![
+    let h_groups: Vec<CellGroup> = vec![
         vec![6], 
         vec![4, 1], 
         vec![4, 1, 1], 
@@ -40,7 +40,7 @@ fn create_grid_from_data() {
     ];
     assert_eq!(g.h_groups, h_groups);
 
-    let v_groups: Vec<Vec<u8>> = vec![
+    let v_groups: Vec<CellGroup> = vec![
         vec![2, 3], 
         vec![3, 2], 
         vec![4, 3, 1], 
